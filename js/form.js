@@ -17,9 +17,10 @@ botonAdicionar.addEventListener("click",function(event){
 
     //ASIGNANDO EL HIJO (TD) A LA TABLA
     tabla.appendChild(pacienteTr);
-
+    
     form.reset();
-
+    var ul = document.querySelector("#mensajes-errores");
+    ul.reset();
 });
 
 
@@ -66,6 +67,18 @@ function construirTd(dato, clase){
 function validarPaciente(paciente){
     var errores = [];
 
+    if (paciente.nombre.length == 0){
+        errores.push("Nombre del Paciente no Puede Estar Vacio");
+    }
+    if (paciente.peso.length == 0){
+        errores.push("Peso del Paciente no Puede Estar Vacio");
+    }
+    if (paciente.altura.length == 0){
+        errores.push("Altura del Paciente no Puede Estar Vacio");
+    }
+    if (paciente.gordura.length == 0){
+        errores.push("% de Gordura del Paciente no Puede Estar Vacio");
+    }
     if (!validarPeso(paciente.peso)){
         errores.push("Peso del Paciente Incorrecto");
     }
@@ -79,6 +92,7 @@ function validarPaciente(paciente){
 function exibirMsjErrores(errores){
 
     var ul = document.querySelector("#mensajes-errores");
+    ul.innerHTML="";
 
     errores.forEach(function(error){
 
