@@ -9,6 +9,12 @@ botonAdicionar.addEventListener("click",function(event){
     var tabla = document.querySelector("#tabla-pacientes");
     var pacienteTr = construirTr(paciente);
 
+    var errores = validarPaciente(paciente);
+    if(errores.length >0){
+        exibirMsjErrores(errores);
+        return;
+    }
+
     //ASIGNANDO EL HIJO (TD) A LA TABLA
     tabla.appendChild(pacienteTr);
 
@@ -55,4 +61,29 @@ function construirTd(dato, clase){
     td.textContent = dato;
 
     return td;
+}
+
+function validarPaciente(paciente){
+    var errores = [];
+
+    if (!validarPeso(paciente.peso)){
+        errores.push("Peso del Paciente Incorrecto");
+    }
+    if (!validarAltura(paciente.altura)){
+        errores.push("Altura del Paciente Incorrecto");
+    }
+
+    return errores;
+}
+
+function exibirMsjErrores(errores){
+
+    var ul = document.querySelector("#mensajes-errores");
+
+    errores.forEach(function(error){
+
+        var li = document.createElement("li");
+        li.textContent= error;
+        ul.appendChild(li);
+    });
 }
