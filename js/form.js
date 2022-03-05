@@ -20,7 +20,8 @@ botonAdicionar.addEventListener("click",function(event){
     
     form.reset();
     var ul = document.querySelector("#mensajes-errores");
-    ul.reset();
+    ul.innerHTML="";
+    
 });
 
 
